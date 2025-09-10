@@ -1,23 +1,44 @@
 package day16;
 
-import java.util.Iterator;
+class Solution {
+    public int getSecondLargest(int[] arr) {
+        int largest = arr[0];
+        int secondLargest = Integer.MIN_VALUE;
 
-public class SecondLargest {
-	public static void main(String[] args) {
-		int[] arr = {10, 45, 2, 99, 56, 77};
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > largest) {
+                secondLargest = largest;
+                largest = arr[i];
+            } else if (arr[i] > secondLargest && arr[i] != largest) {
+                secondLargest = arr[i];
+            }
+        }
 
-        // Pehle element ko max maan lo
-        int max = arr[0];
-		
-		for (int i = 0; i < arr.length; i++) {
-			if (arr[i]>max) {
-				max = arr[i];
-				
-			}
-			
-		}
-		System.out.println(" yeah sabse bada hai bhai " + max);
-		
-	}
+        if (secondLargest == Integer.MIN_VALUE) {
+            return -1; // second largest exist nahi karta
+        }
+        return secondLargest;
+    }
 
+    public int getLargest(int[] arr) {
+        int largest = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > largest) {
+                largest = arr[i];
+            }
+        }
+        return largest;
+    }
+
+    // main method Eclipse ke liye
+    public static void main(String[] args) {
+        int[] arr = {20, 50, 10, 40};
+
+        Solution sol = new Solution();
+        int largest = sol.getLargest(arr);
+        int secondLargest = sol.getSecondLargest(arr);
+
+        System.out.println("Largest element is: " + largest);
+        System.out.println("Second largest element is: " + secondLargest);
+    }
 }
